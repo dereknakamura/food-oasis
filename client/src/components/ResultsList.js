@@ -162,17 +162,23 @@ const isAlmostClosed = (hours) => {
 };
 
 const ResultsList = ({
+  updateScrollPosition,
   doSelectStakeholder,
   selectedStakeholder,
   stakeholders,
   setSelectedPopUp,
   setIsPopupOpen,
   viewport,
+  scrollPosition,
   setViewport,
 }) => {
   const classes = useStyles();
 
   const handleStakeholderClick = (stakeholder) => {
+    const stakeholderContainerElement = document.querySelector(
+      "#stakeholderContainer"
+    );
+    updateScrollPosition(stakeholderContainerElement.scrollTop);
     doSelectStakeholder(stakeholder);
     setIsPopupOpen(true);
     setSelectedPopUp(stakeholder);
@@ -184,7 +190,13 @@ const ResultsList = ({
   };
 
   return (
-    <Grid item xs={12} md={4} className={classes.list}>
+    <Grid
+      item
+      xs={12}
+      md={4}
+      className={classes.list}
+      id={`stakeholderContainer`}
+    >
       <div className={classes.stakeholderArrayHolder}>
         {stakeholders &&
         selectedStakeholder &&
@@ -192,6 +204,8 @@ const ResultsList = ({
           <SelectedStakeholderDisplay
             doSelectStakeholder={doSelectStakeholder}
             selectedStakeholder={selectedStakeholder}
+            updateScrollPosition={updateScrollPosition}
+            scrollPosition={scrollPosition}
             iconReturn={iconReturn}
           />
         ) : stakeholders ? (
