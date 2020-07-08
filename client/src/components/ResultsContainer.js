@@ -93,6 +93,7 @@ export default function ResultsContainer(props) {
   const [selectedStakeholder, doSelectStakeholder] = React.useState(null);
   const [selectedPopUp, setSelectedPopUp] = React.useState(null);
   const [isPopupOpen, setIsPopupOpen] = React.useState(false);
+  const [scrollPosition, updateScrollPosition] = React.useState(0);
 
   const viewPortHash = {
     1: 13.5,
@@ -108,6 +109,14 @@ export default function ResultsContainer(props) {
     zoom: viewPortHash[radius],
     latitude: origin.latitude || JSON.parse(storage.origin).latitude,
     longitude: origin.longitude || JSON.parse(storage.origin).longitude,
+  });
+
+  React.useEffect(() => {
+    const stakeholderContainerElement = document.querySelector(
+      "#stakeholderContainer"
+    );
+    if (!!stakeholderContainerElement && !selectedStakeholder)
+      stakeholderContainerElement.scrollTo(0, scrollPosition);
   });
 
   return (
@@ -134,6 +143,8 @@ export default function ResultsContainer(props) {
         <ResultsList
           selectedStakeholder={selectedStakeholder}
           doSelectStakeholder={doSelectStakeholder}
+          updateScrollPosition={updateScrollPosition}
+          scrollPosition={scrollPosition}
           stakeholders={data}
           setSelectedPopUp={setSelectedPopUp}
           setIsPopupOpen={setIsPopupOpen}
