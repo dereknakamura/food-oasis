@@ -113,6 +113,14 @@ const SelectedStakeholderDisplay = ({
 }) => {
   const classes = useStyles();
 
+  (() => {
+    //scrolls to top of selected stakeholder
+    const stakeholderContainerElement = document.querySelector(
+      "#stakeholderContainer"
+    );
+    stakeholderContainerElement.scrollTo(0, 0);
+  })();
+
   const dayOfWeek = (dayOfWeekString) => {
     switch (dayOfWeekString.toLowerCase()) {
       case "sun":
