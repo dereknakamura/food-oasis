@@ -33,12 +33,9 @@ const useStyles = makeStyles({
     color: "black",
     margin: "0",
     height: "100%",
-    overflowY: "scroll",
   }),
   mainContent: {
     margin: "0",
-    paddingBottom: "50px",
-    overflowY: "scroll",
     flexGrow: 1,
   },
   stakeholderEditWrapper: {
@@ -48,7 +45,7 @@ const useStyles = makeStyles({
   },
   homeWrapper: {
     backgroundSize: "cover",
-    minHeight: "max(105vh,20em)",
+    minHeight: "max(100vh,20em)",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -247,9 +244,10 @@ function App() {
               </Route>
             </Switch>
             <Toast toast={toast} setToast={setToast} />
-          </Grid>
-          <Grid item>
-            <Footer />
+            {}
+            <Grid item>
+              <Footer />
+            </Grid>
           </Grid>
         </Router>
       </ThemeProvider>
